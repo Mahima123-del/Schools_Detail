@@ -1,6 +1,6 @@
 import multer from "multer";
 import path from "path";
-import { db } from "../../utils/db";
+import  db  from "../../utils/db";
 
 // Configure Multer with custom filename
 const storage = multer.diskStorage({

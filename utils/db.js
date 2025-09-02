@@ -1,13 +1,21 @@
-// utils/db.js
 import mysql from 'mysql2';
+import dotenv from 'dotenv';
+dotenv.config(); // Optional on Railway, but fine to keep
 
-// Create a connection to MySQL using Railway environment variables
 const db = mysql.createConnection({
-  host: process.env.MYSQLHOST,       // Railway MySQL host
-  user: process.env.MYSQLUSER,       // Railway MySQL username
-  password: process.env.MYSQLPASSWORD, // Railway MySQL password
-  database: process.env.MYSQLDATABASE, // Railway MySQL database name
-  port: process.env.MYSQLPORT        // Railway MySQL port (usually 3306)
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error('MySQL Connection Failed:', err);
+  } else {
+    console.log('Connected to MySQL successfully!');
+  }
 });
 
 export default db;
