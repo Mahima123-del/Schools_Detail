@@ -1,21 +1,16 @@
 import mysql from 'mysql2';
 import dotenv from 'dotenv';
-dotenv.config(); // Optional on Railway, but fine to keep
+dotenv.config();
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
-  port: process.env.MYSQLPORT
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error('MySQL Connection Failed:', err);
-  } else {
-    console.log('Connected to MySQL successfully!');
-  }
+  port: process.env.MYSQLPORT,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 export default db;
