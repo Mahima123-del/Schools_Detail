@@ -1,8 +1,10 @@
-import mysql from "mysql2";
+import mysql from 'mysql2';
 
-export const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "mahimajoshi123",
-  database: "schoolDB"
+const connection = mysql.createConnection({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE,
 });
+
+export default connection;
